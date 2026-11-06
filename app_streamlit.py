@@ -6,13 +6,18 @@
 # (python -m carga_alta tudo).
 
 import os
+import sys
 
 import joblib
 import pandas as pd
 import streamlit as st
 
-from carga_alta import config
-from carga_alta import modelo as M
+# coloca a pasta do projeto no caminho do Python para achar o pacote carga_alta
+# (no Streamlit Cloud o app pode ser aberto a partir de outra pasta)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from carga_alta import config  # noqa: E402
+from carga_alta import modelo as M  # noqa: E402
 
 st.set_page_config(page_title="Carga Alta - EVCOMX", page_icon="🔥", layout="wide")
 

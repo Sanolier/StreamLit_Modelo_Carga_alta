@@ -60,7 +60,10 @@ if __name__ == '__main__':
     if rodando_no_streamlit():
         # "streamlit run carga_alta/__main__.py" (ex.: Streamlit Community Cloud) abre o app
         import runpy
+        import sys
         from pathlib import Path
-        runpy.run_path(str(Path(__file__).resolve().parent.parent / 'app_streamlit.py'), run_name='__main__')
+        raiz = Path(__file__).resolve().parent.parent
+        sys.path.insert(0, str(raiz))
+        runpy.run_path(str(raiz / 'app_streamlit.py'), run_name='__main__')
     else:
         main()
