@@ -1,0 +1,7 @@
+periodo,nivel,cestos,frac_cestos,taxa_carga_alta,min_parada_medio_por_cesto,acao
+5 provas,verde,1922,0.7330282227307399,0.09209157127991675,0.37655220256677074,Carregar normalmente
+5 provas,amarelo,426,0.16247139588100687,0.22535211267605634,0.8810250391236306,"Conferir o topo antes de içar e nivelar se sobrar, sem atrasar a carga"
+5 provas,vermelho,274,0.10450038138825324,0.5291970802919708,2.1328467153284674,"Parar 1 minuto: reacomodar o topo, tirar excesso de leve e avisar a sala do forno"
+mês de prova,verde,239,0.6789772727272727,0.04184100418410042,0.07873082287308229,Carregar normalmente
+mês de prova,amarelo,45,0.1278409090909091,0.17777777777777778,0.38666666666666666,"Conferir o topo antes de içar e nivelar se sobrar, sem atrasar a carga"
+mês de prova,vermelho,68,0.19318181818181818,0.5735294117647058,2.060049019607843,"Parar 1 minuto: reacomodar o topo, tirar excesso de leve e avisar a sala do forno"

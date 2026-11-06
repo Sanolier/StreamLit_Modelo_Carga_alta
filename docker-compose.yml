@@ -1,0 +1,19 @@
+services:
+  pipeline:
+    build: .
+    image: carga-alta:1.0
+    command: ["tudo"]
+    volumes:
+      - ./saida:/app/saida
+
+  api:
+    build: .
+    image: carga-alta:1.0
+    command: ["servir", "--porta", "8000"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./saida:/app/saida
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully

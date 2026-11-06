@@ -1,0 +1,7 @@
+# Versões fixas: são as mesmas com que a pipeline foi testada e que reproduzem os números da apresentação.
+numpy==2.5.3
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+tzdata>=2024.1
