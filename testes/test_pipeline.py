@@ -78,7 +78,6 @@ class TestApp(unittest.TestCase):
         at = AppTest.from_file(app, default_timeout=180)
         at.run()
         self.assertFalse(at.exception, at.exception)
-        for pagina in ['Mês de prova', 'Prever arquivo CSV', 'Desempenho do modelo', 'Sobre o modelo',
-                       'Simular um cesto']:
+        for pagina in ['Simular um cesto', 'Mês de prova', 'Prever arquivo CSV', 'Sobre o projeto', 'Início']:
             at.sidebar.radio[0].set_value(pagina).run()
             self.assertFalse(at.exception, f'{pagina}: {at.exception}')

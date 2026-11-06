@@ -93,16 +93,16 @@ docker run --rm -p 8501:8501 -v "$(pwd)/saida:/app/saida" carga-alta:1.0 app
 ```
 
 Abra <http://localhost:8501>. No Windows, dê dois cliques em `rodar_app.bat` (com Docker) ou
-`rodar_app_sem_docker.bat` (sem Docker). Na primeira abertura, se `./saida` estiver vazia, o app
-prepara os dados, treina e avalia o modelo sozinho (cerca de 20 segundos).
+`rodar_app_sem_docker.bat` (sem Docker). O app usa o modelo e os resultados que a pipeline grava em
+`saida/` (já incluídos no repositório; para gerar de novo: `python -m carga_alta tudo`).
 
 | Página | O que mostra |
 |---|---|
-| Simular um cesto | Parte de um cesto real do mês de prova (ou de valores típicos); cada sinal pode ser alterado e a nota, o nível, a ação e o peso de cada sinal são recalculados na hora |
-| Mês de prova | As notas dos 352 cestos ao longo do mês, a carga alta real em cada nível e a tabela filtrável, com download para Excel |
-| Prever arquivo CSV | Envia um CSV de cestos (aceita o formato do Excel em português) e baixa as notas |
-| Desempenho do modelo | Comparação com a regra simples e o modelo anterior, níveis de risco e economia anual |
-| Sobre o modelo | Como a nota é calculada, os níveis e os 27 sinais esperados |
+| Início | Resultado no mês de prova e comparação com a regra simples e o modelo anterior |
+| Simular um cesto | Escolhe um cesto do mês de prova, muda os principais sinais e vê a nota, o nível e a ação |
+| Mês de prova | Nota de cada cesto ao longo do mês, carga alta em cada nível e tabela dos cestos |
+| Prever arquivo CSV | Envia um CSV de cestos e baixa as notas |
+| Sobre o projeto | Como a nota é calculada, os níveis e os 27 sinais |
 
 ## Fluxo da pipeline
 
@@ -158,7 +158,7 @@ de forno por ano (R$ 1,2 a 2,6 milhões), já descontados os alarmes falsos.
 1. Suba esta pasta para um repositório no GitHub (com `dados/brutos`, `saida/modelo` e `.streamlit`).
 2. Em <https://share.streamlit.io>, **Create app** → escolha o repositório e a branch `main`.
 3. Em **Main file path**, use **`app_streamlit.py`**.
-4. **Deploy**. O `requirements.txt` instala tudo; na primeira abertura o app prepara os dados (cerca de 20 s).
+4. **Deploy**. O `requirements.txt` instala tudo.
 
 Se o app já tiver sido publicado com `carga_alta/__main__.py` como arquivo principal, ele também funciona:
 quando é executado pelo Streamlit, esse arquivo abre o `app_streamlit.py`.
