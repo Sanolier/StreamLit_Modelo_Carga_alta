@@ -1,3 +1,4 @@
+import importlib.util
 import os
 import shutil
 import tempfile
@@ -67,3 +68,17 @@ class TestPipeline(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+@unittest.skipUnless(importlib.util.find_spec('streamlit'), 'streamlit não instalado')
+class TestApp(unittest.TestCase):
+    def test_paginas(self):
+        from streamlit.testing.v1 import AppTest
+        app = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'app_streamlit.py')
+        at = AppTest.from_file(app, default_timeout=180)
+        at.run()
+        self.assertFalse(at.exception, at.exception)
+        for pagina in ['Mês de prova', 'Prever arquivo CSV', 'Desempenho do modelo', 'Sobre o modelo',
+                       'Simular um cesto']:
+            at.sidebar.radio[0].set_value(pagina).run()
+            self.assertFalse(at.exception, f'{pagina}: {at.exception}')

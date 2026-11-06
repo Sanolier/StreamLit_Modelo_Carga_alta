@@ -11,12 +11,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY carga_alta/ carga_alta/
+COPY app_streamlit.py .
+COPY .streamlit/ .streamlit/
 COPY testes/ testes/
 COPY dados/brutos/ dados/brutos/
 COPY exemplos/ exemplos/
 
 VOLUME ["/app/saida"]
-EXPOSE 8000
+EXPOSE 8000 8501
 
 ENTRYPOINT ["python", "-m", "carga_alta"]
 

@@ -6,6 +6,18 @@ services:
     volumes:
       - ./saida:/app/saida
 
+  app:
+    build: .
+    image: carga-alta:1.0
+    command: ["app", "--porta", "8501"]
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./saida:/app/saida
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+
   api:
     build: .
     image: carga-alta:1.0

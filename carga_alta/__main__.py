@@ -15,7 +15,19 @@ def main(argv=None):
     pr.add_argument('--saida', help='CSV de saída (padrão: SAIDA/previsoes/previsoes.csv)')
     s = sub.add_parser('servir', help='sobe a API HTTP')
     s.add_argument('--porta', type=int, default=8000)
+    ap = sub.add_parser('app', help='sobe o app Streamlit')
+    ap.add_argument('--porta', type=int, default=8501)
     a = p.parse_args(argv)
+
+    if a.etapa == 'app':
+        import subprocess
+        import sys
+        from pathlib import Path
+        app = Path(__file__).resolve().parent.parent / 'app_streamlit.py'
+        cmd = [sys.executable, '-m', 'streamlit', 'run', str(app), '--server.address', '0.0.0.0',
+               '--server.port', str(a.porta), '--server.headless', 'true', '--browser.gatherUsageStats', 'false']
+        print(f'[app] app Streamlit em http://localhost:{a.porta}  (Ctrl+C para parar)', flush=True)
+        raise SystemExit(subprocess.call(cmd, cwd=app.parent))
 
     inicio = time.time()
     if a.etapa in ('tudo', 'preparar'):
@@ -36,5 +48,19 @@ def main(argv=None):
     print(f'[{a.etapa}] concluído em {time.time() - inicio:.0f} s')
 
 
+def rodando_no_streamlit():
+    try:
+        from streamlit import runtime
+        return runtime.exists()
+    except Exception:
+        return False
+
+
 if __name__ == '__main__':
-    main()
+    if rodando_no_streamlit():
+        # "streamlit run carga_alta/__main__.py" (ex.: Streamlit Community Cloud) abre o app
+        import runpy
+        from pathlib import Path
+        runpy.run_path(str(Path(__file__).resolve().parent.parent / 'app_streamlit.py'), run_name='__main__')
+    else:
+        main()
